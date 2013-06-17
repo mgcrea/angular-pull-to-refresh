@@ -1,0 +1,15 @@
+{
+  "author": "Olivier Louvignes",
+  "name": "angular-pull-to-refresh",
+  "description": "ngPullToRefresh - CSS3 pull-to-refresh directive for AngularJS",
+  "version": "0.2.0",
+  "homepage": "http://mgcrea.github.com/angular-pull-to-refresh",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular-strap/angular-pull-to-refresh.git"
+  },
+  "main": "./pull-to-refresh.js",
+  "dependencies": {
+    "angular-unstable": "latest"
+  }
+}
