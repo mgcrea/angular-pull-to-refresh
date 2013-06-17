@@ -38,6 +38,7 @@ $ bower install angular-pull-to-refresh --save
 
 >
 ``` html
+<link rel="stylesheet" href="components/angular-pull-to-refresh/pull-to-refresh.css">
 <script src="components/angular-pull-to-refresh/pull-to-refresh.js"></script>
 ```
 
