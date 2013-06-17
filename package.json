@@ -1,9 +1,11 @@
 {
   "name": "angular-pull-to-refresh",
   "description": "ngPullToRefresh - CSS3 pull-to-refresh directive for AngularJS",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "main": "./pull-to-refresh.js",
-  "dependencies": {},
+  "dependencies": {
+    "grunt": "~0.4.1"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.0",
