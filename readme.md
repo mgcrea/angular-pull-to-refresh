@@ -1,4 +1,4 @@
-# [ngPullToRefresh](http://mgcrea.github.com/angular-pull-to-refresh) [![Build Status](https://secure.travis-ci.org/mgcrea/angular-pull-to-refresh.png?branch=master)](http://travis-ci.org/#!/mgcrea/angular-pull-to-refresh)
+# [ngPullToRefresh](http://mgcrea.github.com/angular-pull-to-refresh)
 
 ngPullToRefresh is a directive providing a simple directive using CSS3 for a pull-to-refresh over CSS3 native overflow (`-webkit-overflow-scroll: touch`).
 
