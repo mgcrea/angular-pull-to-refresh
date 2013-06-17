@@ -95,6 +95,26 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/<%= yeoman.name %>.min.js': '<%= yeoman.dist %>/<%= yeoman.name %>.js'
         }
       }
+    },
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json']
+      },
+      dist: {
+        options: {
+          commit: false,
+          push: false,
+          createTag: false
+        }
+      },
+      push: {
+        options: {
+          bump: false,
+          commitMessage: 'feat(release): bump v${version}',
+          commitFiles: ['-a'],
+          pushTo: 'github'
+        }
+      }
     }
   });
 
@@ -108,6 +128,17 @@ module.exports = function (grunt) {
     'cssmin:dist',
     'ngmin:dist',
     'uglify:dist'
+  ]);
+
+  grunt.registerTask('release', [
+    'bump:dist',
+    'build'
+  ]);
+
+  grunt.registerTask('push', [
+    // 'bump:dist',
+    // 'build',
+    'bump:push'
   ]);
 
   grunt.registerTask('default', ['build']);
