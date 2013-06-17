@@ -1,8 +1,8 @@
 # [ngPullToRefresh](http://mgcrea.github.com/angular-pull-to-refresh)
 
-ngPullToRefresh is a directive providing a simple directive using CSS3 for a pull-to-refresh over CSS3 native overflow (`-webkit-overflow-scroll: touch`).
+ngPullToRefresh is a directive providing a simple css-only pull-to-refresh component leveraging native style momentum scrolling `-webkit-overflow-scroll: touch`.
 
-The directives has a built-in debounce system (400ms treshold by default) and can leverage native `$q` promises.
+The directive has a configurable built-in debounce system (400ms treshold by default) and can leverage angular `$q` promises.
 
 ## Examples
 
@@ -41,8 +41,8 @@ $ bower install angular-pull-to-refresh --save
 
 >
 ``` html
-<link rel="stylesheet" href="components/angular-pull-to-refresh/pull-to-refresh.css">
-<script src="components/angular-pull-to-refresh/pull-to-refresh.js"></script>
+<link rel="stylesheet" href="components/angular-pull-to-refresh/dist/pull-to-refresh.css">
+<script src="components/angular-pull-to-refresh/dist/pull-to-refresh.js"></script>
 ```
 
 + Inject the `mgcrea.pullToRefresh` module into your app:

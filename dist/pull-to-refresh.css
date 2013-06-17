@@ -1,0 +1,23 @@
+/**
+ * ngPullToRefresh - CSS3 pull-to-refresh directive for AngularJS
+ * @version v0.2.0 - 2013-06-17
+ * @link http://mgcrea.github.com/angular-pull-to-refresh
+ * @author Olivier Louvignes <olivier@mg-crea.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+.ptr {
+  display: block;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  height: 20px;
+  margin: -41px auto 0;
+  padding: 10px 0;
+  -webkit-transition-property: margin;
+  -webkit-transition-duration: 400ms;
+  border-bottom: 1px dashed #ccc;
+}
+.ptr.ptr-loading {
+  margin: 0 auto;
+  -webkit-transition-duration: 0ms;
+}
