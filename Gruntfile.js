@@ -111,6 +111,7 @@ module.exports = function (grunt) {
         options: {
           bump: false,
           commitMessage: 'feat(release): bump v<%= pkg.version %>',
+          tagName: 'v<%= pkg.version %>',
           tagMessage: 'feat(release): bump v<%= pkg.version %>',
           commitFiles: ['-a'],
           pushTo: 'github'
