@@ -6,6 +6,9 @@ The directives has a built-in debounce system (400ms treshold by default) and ca
 
 ## Examples
 
+[![Demo](http://mgcrea.github.io/angular-pull-to-refresh/demo.gif)](http://mgcrea.github.com/angular-pull-to-refresh)
+
+
 ``` html
 <div class="content" pull-to-refresh="refresh()">
 </div>
