@@ -1,6 +1,6 @@
 /**
  * ngPullToRefresh - CSS3 pull-to-refresh directive for AngularJS
- * @version v0.2.4 - 2013-06-17
+ * @version v0.2.1 - 2013-06-17
  * @link 
  * @author 
  * @license MIT License, http://www.opensource.org/licenses/MIT
