@@ -24,4 +24,7 @@
   -webkit-transition-property: margin;
   -moz-transition-property: margin;
   transition-property: margin;
+  -webkit-transform: translateZ(0px);
+  -moz-transform: translateZ(0px);
+  transform: translateZ(0px);
 }
