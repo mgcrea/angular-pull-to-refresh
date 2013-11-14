@@ -1,53 +1,141 @@
+// Generated on 2013-11-04 using generator-angular-component 0.2.3
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
+  require('time-grunt')(grunt);
 
-  // configurable paths
-  var yeomanConfig = {
-    app: 'src',
-    dist: 'dist',
-    name: 'pull-to-refresh'
-  };
-
+  // Project configuration
   grunt.initConfig({
-    yeoman: yeomanConfig,
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: require('./package.json'),
+    bower: require('./bower.json'),
+    yo: {
+      // Configurable paths
+      name: '<%= pkg.name %>',
+      src: require('./bower.json').appPath || 'src',
+      dist: 'dist'
+    },
     meta: {
       banner: '/**\n' +
-      ' * <%= pkg.description %>\n' +
+      ' * <%= pkg.name %>\n' +
       ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
       ' * @link <%= pkg.homepage %>\n' +
-      ' * @author <%= pkg.author %>\n' +
+      ' * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n' +
       ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
       ' */\n'
+    },
+    open: {
+      server: {
+        path: 'http://localhost:<%= connect.options.port %>'
+      }
+    },
+    watch: {
+      test: {
+        files: '<%= jshint.test.src %>',
+        tasks: ['jshint:test', 'karma:unit']
+      },
+      less: {
+        files: ['{.tmp,docs,<%= yo.src %>}/**/*.less'],
+        tasks: ['less:dev']
+      },
+      app: {
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        },
+        files: [
+          '{.tmp,docs,<%= yo.src %>}/{,*/}*.html',
+          '{.tmp,docs,<%= yo.src %>}/styles/{,*/}*.css',
+          '{.tmp,docs,<%= yo.src %>}/{,*/}*.json',
+          '{.tmp,docs,<%= yo.src %>}/scripts/{,*/}*.js',
+          '{.tmp,docs,<%= yo.src %>}/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
+      }
+    },
+    connect: {
+      options: {
+        // Use a system-assigned port.
+        port: 51903,
+        // Change this to '0.0.0.0' to access the server from outside.
+        hostname: '0.0.0.0',
+        livereload: true
+      },
+      livereload: {
+        options: {
+          open: true,
+          base: [
+            '.tmp',
+            'docs'
+          ]
+        }
+      },
+      test: {
+        options: {
+          port: 9001,
+          base: [
+            '.tmp',
+            'test',
+            '<%= yo.src %>'
+          ]
+        }
+      }
     },
     clean: {
       dist: {
         files: [{
           dot: true,
           src: [
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '.tmp',
+            '<%= yo.dist %>/*',
+            '!<%= yo.dist %>/.git*'
           ]
         }]
+      },
+      server: '.tmp'
+    },
+    less: {
+      options: {
+        paths: ['<%= yo.src %>']
+      },
+      dev: {
+        options: {
+          dumpLineNumbers: false,
+        },
+        files: {
+          '<%= yo.src %>/<%= pkg.name %>.css': ['<%= yo.src %>/{,*/}*.less']
+        }
+      },
+      dist: {
+        options: {
+          cleancss: true,
+          report: 'gzip'
+        },
+        files: {
+          '<%= yo.dist %>/<%= pkg.name %>.min.css': ['<%= yo.src %>/{,*/}*.less']
+        }
       }
     },
     jshint: {
-      options: {
-        jshintrc: '.jshintrc'
+      src: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: [
+          'Gruntfile.js',
+          '<%= yo.src %>/{,*/}*.js'
+        ]
       },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/{,*/}*.js'
-      ]
+      test: {
+        options: {
+          jshintrc: 'test/.jshintrc'
+        },
+        src: ['test/**/*.js']
+      }
     },
     karma: {
       options: {
         configFile: 'test/karma.conf.js',
-        browsers: ['Chrome'] // PhantomJS
+        browsers: ['PhantomJS']
       },
       unit: {
         singleRun: true
@@ -56,91 +144,107 @@ module.exports = function (grunt) {
         autoWatch: true
       }
     },
-    less: {
+    concat: {
       options: {
-        banner: '<%= meta.banner %>'
+        stripBanners: true
       },
-      dist: {
+      banner: {
+        options: {
+          banner: '<%= meta.banner %>',
+        },
         files: {
-          '<%= yeoman.dist %>/<%= yeoman.name %>.css': '<%= yeoman.app %>/<%= yeoman.name %>.less'
+          '<%= yo.dist %>/<%= pkg.name %>.js': ['<%= yo.dist %>/<%= pkg.name %>.js' ],
+          '<%= yo.dist %>/<%= pkg.name %>.min.js': ['<%= yo.dist %>/<%= pkg.name %>.min.js' ],
+          '<%= yo.dist %>/<%= pkg.name %>.css': ['<%= yo.src %>/<%= pkg.name %>.css' ],
+          '<%= yo.dist %>/<%= pkg.name %>.min.css': ['<%= yo.dist %>/<%= pkg.name %>.min.css' ]
         }
-      }
-    },
-    cssmin: {
-      options: {
-        banner: '<%= meta.banner %>'
       },
       dist: {
+        options: {
+          // Replace all 'use strict' statements in the code with a single one at the top
+          banner: '(function(window, document, undefined) {\n\'use strict\';\n',
+          footer: '\n})(window, document);\n',
+          process: function(src, filepath) {
+            return '// Source: ' + filepath + '\n' +
+              src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+          }
+        },
         files: {
-          '<%= yeoman.dist %>/<%= yeoman.name %>.min.css': '<%= yeoman.dist %>/<%= yeoman.name %>.css'
+          '<%= yo.dist %>/<%= pkg.name %>.js': [
+            '<%= yo.src %>/{,*/}*.js'
+          ]
         }
       }
     },
     ngmin: {
       options: {
-        banner: '<%= meta.banner %>'
+        expand: true
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/<%= yeoman.name %>.js': '<%= yeoman.app %>/<%= yeoman.name %>.js'
+          '<%= yo.dist %>/<%= yo.name %>.js': ['<%= yo.dist %>/<%= yo.name %>.js']
         }
+      }
+    },
+    ngtemplates: {
+      options: {
+        module: 'mgcrea.pullToRefresh',
+      },
+      dev: {
+        cwd: 'src',
+        src: '{,*/}*.html',
+        dest: '<%= yo.src %>/<%= yo.name %>.tpl.js'
+      },
+      dist: {
+        options: {
+          htmlmin: {},
+        },
+        cwd: 'src',
+        src: '{,*/}*.html',
+        dest: '<%= yo.dist %>/<%= yo.name %>.tpl.js'
       }
     },
     uglify: {
       options: {
-        banner: '<%= meta.banner %>'
+        banner: '<%= meta.banner %>',
+        report: 'gzip'
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/<%= yeoman.name %>.min.js': '<%= yeoman.dist %>/<%= yeoman.name %>.js'
-        }
-      }
-    },
-    bump: {
-      options: {
-        files: ['package.json', 'bower.json']
-      },
-      dist: {
-        options: {
-          commit: false,
-          push: false,
-          createTag: false
-        }
-      },
-      push: {
-        options: {
-          bump: false,
-          commitMessage: 'feat(release): bump v<%= pkg.version %>',
-          tagName: 'v<%= pkg.version %>',
-          tagMessage: 'feat(release): bump v<%= pkg.version %>',
-          commitFiles: ['-a'],
-          pushTo: 'github'
+          '<%= yo.dist %>/<%= yo.name %>.min.js': ['<%= Object.keys(ngmin.dist.files)[0] %>']
         }
       }
     }
   });
 
+  grunt.registerTask('server', [
+    'clean:server',
+    'less:dev',
+    'connect:livereload',
+    'watch'
+  ]);
+
   grunt.registerTask('test', [
+    'jshint',
     'karma:unit'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
+    'less:dev',
     'less:dist',
-    'cssmin:dist',
+    'ngtemplates:dist',
+    'concat:dist',
     'ngmin:dist',
-    'uglify:dist'
+    'uglify:dist',
+    'concat:banner'
   ]);
 
   grunt.registerTask('release', [
-    'bump:dist',
-    'build'
-  ]);
-
-  grunt.registerTask('push', [
-    // 'bump:dist',
-    // 'build',
-    'bump:push'
+    'test',
+    'bump-only',
+    'dist',
+    'bump-commit'
   ]);
 
   grunt.registerTask('default', ['build']);

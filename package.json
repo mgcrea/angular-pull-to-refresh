@@ -1,25 +1,52 @@
 {
   "name": "angular-pull-to-refresh",
-  "description": "ngPullToRefresh - CSS3 pull-to-refresh directive for AngularJS",
-  "version": "0.2.2",
-  "main": "./pull-to-refresh.js",
-  "dependencies": {
-    "grunt": "~0.4.1"
+  "version": "0.3.0",
+  "description": "angular-pull-to-refresh",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/mgcrea/angular-pull-to-refresh",
+  "bugs": "https://github.com/mgcrea/angular-pull-to-refresh/issues",
+  "author": {
+    "name": "Olivier Louvignes",
+    "email": "olivier@mg-crea.com",
+    "url": "https://github.com/mgcrea"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgcrea/angular-pull-to-refresh.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
   "devDependencies": {
+    "connect-livereload": "~0.3.0",
     "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-jshint": "~0.3.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-less": "~0.5.0",
-    "grunt-contrib-cssmin": "~0.5.0",
-    "grunt-karma": "~0.3.0",
-    "grunt-ngmin": "~0.0.2",
-    "grunt-angular-templates": "~0.3.8",
-    "matchdep": "~0.1.1",
-    "grunt-bump": "0.0.6"
-  },
-  "engines": {
-    "node": ">=0.8.0"
+    "grunt-angular-templates": "~0.4.7",
+    "grunt-bump": "0.0.11",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-less": "~0.8.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-karma": "~0.6.2",
+    "grunt-ngmin": "0.0.3",
+    "grunt-open": "~0.2.2",
+    "karma": "~0.10.4",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.3",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma-requirejs": "~0.1.0",
+    "karma-script-launcher": "~0.1.0",
+    "load-grunt-tasks": "~0.2.0",
+    "time-grunt": "~0.2.1"
   }
 }

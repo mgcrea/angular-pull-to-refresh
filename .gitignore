@@ -1,8 +1,11 @@
 .DS_Store
-npm-debug.log
 *.sublime-project
 *.sublime-workspace
-test/coverage
-components/
+*.todo
+bower_components/
 node_modules/
+docs/
 !.gitignore
+
+src/*.css
+scr/*.tpl.js

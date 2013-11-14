@@ -24,12 +24,18 @@
   "smarttabs": true,
 
   "boss": false,
-  "laxbreak": false,
+  "laxbreak": true,
   "eqnull": false,
   "expr": true,
 
   "globals": {
-    "angular": false
+    "angular": true,
+    "inject": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "it": true,
+    "expect": true
   }
 
 }

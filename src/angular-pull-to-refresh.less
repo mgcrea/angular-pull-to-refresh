@@ -1,0 +1,29 @@
+
+// Vars
+//
+
+@height: 40px;
+
+// Styles
+//
+
+.pull-to-refresh {
+  position: relative;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: -@height auto 0;
+  padding: 0;
+  width: 100%;
+  height: @height;
+  border-bottom: 1px dashed #ccc;
+  text-align: center;
+  line-height: @height;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-property: margin;
+  -moz-transition-property: margin;
+  transition-property: margin;
+}

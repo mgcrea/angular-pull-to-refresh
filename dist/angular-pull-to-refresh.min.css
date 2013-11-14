@@ -1,0 +1,8 @@
+/**
+ * angular-pull-to-refresh
+ * @version v0.3.0 - 2013-11-14
+ * @link https://github.com/mgcrea/angular-pull-to-refresh
+ * @author Olivier Louvignes <olivier@mg-crea.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+.pull-to-refresh{position:relative;display:block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:-40px auto 0;padding:0;width:100%;height:40px;border-bottom:1px dashed #ccc;text-align:center;line-height:40px;-webkit-transition-duration:400ms;-moz-transition-duration:400ms;transition-duration:400ms;-webkit-transition-property:margin;-moz-transition-property:margin;transition-property:margin}
