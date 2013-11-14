@@ -1,4 +1,5 @@
-# [ngPullToRefresh](http://mgcrea.github.com/angular-pull-to-refresh)
+# [ngPullToRefresh](http://mgcrea.github.com/angular-pull-to-refresh) [![Build Status](https://secure.travis-ci.org/mgcrea/angular-pull-to-refresh.png?branch=master)](http://travis-ci.org/#!/mgcrea/angular-pull-to-refresh)
+
 
 `mgcrea.pullToRefresh` is a module providing a simple css-only pull-to-refresh component leveraging native style momentum scrolling `-webkit-overflow-scroll: touch`.
 
