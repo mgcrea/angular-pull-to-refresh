@@ -118,7 +118,8 @@ module.exports = function(grunt) {
     jshint: {
       src: {
         options: {
-          jshintrc: '.jshintrc'
+          jshintrc: '.jshintrc',
+          ignores: ['<%= yo.src %>/{,*/}*.tpl.js']
         },
         src: [
           'Gruntfile.js',
@@ -194,14 +195,6 @@ module.exports = function(grunt) {
         cwd: 'src',
         src: '{,*/}*.html',
         dest: '<%= yo.src %>/<%= yo.name %>.tpl.js'
-      },
-      dist: {
-        options: {
-          htmlmin: {},
-        },
-        cwd: 'src',
-        src: '{,*/}*.html',
-        dest: '<%= yo.dist %>/<%= yo.name %>.tpl.js'
       }
     },
     uglify: {
@@ -233,7 +226,7 @@ module.exports = function(grunt) {
     'clean:dist',
     'less:dev',
     'less:dist',
-    'ngtemplates:dist',
+    'ngtemplates:dev',
     'concat:dist',
     'ngmin:dist',
     'uglify:dist',
