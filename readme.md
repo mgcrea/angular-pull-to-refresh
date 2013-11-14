@@ -33,6 +33,9 @@ angular.module('myApp', ['mgcrea.pullToRefresh']);
 
 [![Demo](http://mgcrea.github.io/angular-pull-to-refresh/demo.gif)](http://mgcrea.github.com/angular-pull-to-refresh)
 
+You can check out a working demo there (only works on touch devices):
+
++ **http://plnkr.co/edit/C4dV0cvWxvrfR6y0uCxI?p=preview**
 
 ``` html
 <div class="content">
