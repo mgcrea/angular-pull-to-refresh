@@ -2,6 +2,7 @@
   "name": "angular-pull-to-refresh",
   "version": "0.3.0",
   "description": "angular-pull-to-refresh",
+  "main": "dist/angular-pull-to-refresh.js",
   "keywords": [
     "angular"
   ],
