@@ -3,7 +3,7 @@
 angular.module('mgcrea.pullToRefresh', [])
 
   .constant('pullToRefreshConfig', {
-    treshold: 60,
+    threshold: 20,
     debounce: 400,
     text: {
       pull: 'pull to refresh',
@@ -45,17 +45,20 @@ angular.module('mgcrea.pullToRefresh', [])
           };
 
           var shouldReload = false;
+          var top = 0;
           iElement.bind('touchmove', function(ev) {
-            var top = scrollElement[0].scrollTop;
-            if(top < -config.treshold && !shouldReload) {
+            if(top > config.threshold && !shouldReload) {
               setStatus('release');
-            } else if(top > -config.treshold && shouldReload) {
+            } else if(top < config.threshold && shouldReload) {
               setStatus('pull');
             }
           });
 
           iElement.bind('touchend', function(ev) {
             if(!shouldReload) return;
+
+            top = 0;
+
             ptrElement.style.webkitTransitionDuration = 0;
             ptrElement.style.margin = '0 auto';
             setStatus('loading');
