@@ -55,9 +55,9 @@ angular.module('mgcrea.pullToRefresh', [])
           });
 
           iElement.bind('touchend', function(ev) {
-            if(!shouldReload) return;
-
             top = 0;
+
+            if(!shouldReload) return;
 
             ptrElement.style.webkitTransitionDuration = 0;
             ptrElement.style.margin = '0 auto';
