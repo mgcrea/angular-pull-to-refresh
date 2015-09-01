@@ -5,6 +5,10 @@
   "keywords": [
     "angular"
   ],
+  "main": [
+    "./dist/angular-pull-to-refresh.css",
+    "./dist/angular-pull-to-refresh.js"
+  ],
   "homepage": "https://github.com/mgcrea/angular-pull-to-refresh",
   "bugs": "https://github.com/mgcrea/angular-pull-to-refresh/issues",
   "author": {
