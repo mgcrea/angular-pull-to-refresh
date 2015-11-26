@@ -48,6 +48,9 @@ angular.module('mgcrea.pullToRefresh', [])
 
           var shouldReload = false;
           function getTransformStyle(translate) {
+            if (isUsingOverflowScroll) {
+              return {};
+            }
             var translateFn = 'translateY(' + translate + 'px)';
             return {
               '-webkit-transform': translateFn,
@@ -61,6 +64,7 @@ angular.module('mgcrea.pullToRefresh', [])
             }
             return event.touches[0];
           }
+          var isUsingOverflowScroll = true;
           var startY;
           iElement.bind('touchstart', function (ev) {
             startY = getTouch(ev).pageY;
@@ -68,10 +72,11 @@ angular.module('mgcrea.pullToRefresh', [])
           iElement.bind('touchmove', function(ev) {
             var top = scrollElement[0].scrollTop;
             var currentY = getTouch(ev).pageY;
-            iElement.css(getTransformStyle(currentY - startY));
             if (top === 0) {
+              isUsingOverflowScroll = false;
               top = startY - currentY;
             }
+            iElement.css(getTransformStyle(currentY - startY));
             if(top < -config.treshold && !shouldReload) {
               setStatus('release');
             } else if(top > -config.treshold && shouldReload) {
