@@ -20,7 +20,9 @@ angular.module('mgcrea.pullToRefresh', [])
   .directive('pullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig) {
 
     return {
-      scope: true,
+      scope: {
+        pullToRefreshConfig: '='
+      },
       restrict: 'A',
       transclude: true,
       templateUrl: 'angular-pull-to-refresh.tpl.html',
@@ -28,7 +30,7 @@ angular.module('mgcrea.pullToRefresh', [])
 
         return function postLink(scope, iElement, iAttrs) {
 
-          var config = angular.extend({}, pullToRefreshConfig, iAttrs);
+          var config = angular.extend({}, pullToRefreshConfig, scope.pullToRefreshConfig, iAttrs);
           var scrollElement = iElement.parent();
           var ptrElement = window.ptr = iElement.children()[0];
 
