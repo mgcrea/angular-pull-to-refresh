@@ -17,7 +17,7 @@ angular.module('mgcrea.pullToRefresh', [])
     }
   })
 
-  .directive('pullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig) {
+  .directive('pullToRefresh', function($compile, $timeout, $q, pullToRefreshConfig, $injector) {
 
     return {
       scope: true,
@@ -37,6 +37,35 @@ angular.module('mgcrea.pullToRefresh', [])
           scope.text = config.text;
           scope.icon = config.icon;
           scope.status = 'pull';
+
+          var translateStates = function ($translate) {
+            var translateKey = 'PULL2REF.';
+            var states = {
+              pull: $translate(translateKey + 'PULL'),
+              release: $translate(translateKey + 'RELEASE'),
+              loading: $translate(translateKey + 'LOADING')
+            };
+            if (typeof states.pull === 'string') {
+              scope.text = states;
+            }
+            var deferTraslate = function (name) {
+              if (states[name].then) {
+                states[name].then(function (translated) {
+                  scope.text[name] = translated;
+                });
+              }
+            };
+            deferTraslate('pull');
+            deferTraslate('release');
+            deferTraslate('loading');
+            if (typeof states.pull === 'string') {
+              scope.text = states;
+            }
+          };
+          try {
+            // add optional dependency $translate
+            translateStates($injector.get('$translate'));
+          } catch (e) {}
 
           var setStatus = function(status) {
             shouldReload = status === 'release';
