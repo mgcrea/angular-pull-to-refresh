@@ -26,21 +26,52 @@
     '$timeout',
     '$q',
     'pullToRefreshConfig',
-    function ($compile, $timeout, $q, pullToRefreshConfig) {
+    '$injector',
+    function ($compile, $timeout, $q, pullToRefreshConfig, $injector) {
       return {
-        scope: { pullToRefreshConfig: '=' },
+        scope: true,
         restrict: 'A',
         transclude: true,
         templateUrl: 'angular-pull-to-refresh.tpl.html',
         compile: function compile(tElement, tAttrs, transclude) {
           return function postLink(scope, iElement, iAttrs) {
-            var config = angular.extend({}, pullToRefreshConfig, scope.pullToRefreshConfig, iAttrs);
+            var customConfig = scope.$eval(iAttrs.pullToRefreshConfig);
+            var config = angular.extend({}, pullToRefreshConfig, customConfig, iAttrs);
             var scrollElement = iElement.parent();
             var ptrElement = window.ptr = iElement.children()[0];
             // Initialize isolated scope vars
             scope.text = config.text;
             scope.icon = config.icon;
             scope.status = 'pull';
+            var translateStates = function ($translate) {
+              var translateKey = 'PULL2REF.';
+              var states = {
+                  pull: $translate(translateKey + 'PULL'),
+                  release: $translate(translateKey + 'RELEASE'),
+                  loading: $translate(translateKey + 'LOADING')
+                };
+              if (typeof states.pull === 'string') {
+                scope.text = states;
+              }
+              var deferTraslate = function (name) {
+                if (states[name].then) {
+                  states[name].then(function (translated) {
+                    scope.text[name] = translated;
+                  });
+                }
+              };
+              deferTraslate('pull');
+              deferTraslate('release');
+              deferTraslate('loading');
+              if (typeof states.pull === 'string') {
+                scope.text = states;
+              }
+            };
+            try {
+              // add optional dependency $translate
+              translateStates($injector.get('$translate'));
+            } catch (e) {
+            }
             var setStatus = function (status) {
               shouldReload = status === 'release';
               scope.$apply(function () {
