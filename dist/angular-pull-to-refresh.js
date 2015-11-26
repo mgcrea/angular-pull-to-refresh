@@ -1,12 +1,13 @@
 /**
  * angular-pull-to-refresh
- * @version v0.3.0 - 2013-11-14
+ * @version v0.3.0 - 2015-11-26
  * @link https://github.com/mgcrea/angular-pull-to-refresh
  * @author Olivier Louvignes <olivier@mg-crea.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 (function (window, document, undefined) {
   'use strict';
+  // Source: src/angular-pull-to-refresh.js
   angular.module('mgcrea.pullToRefresh', []).constant('pullToRefreshConfig', {
     treshold: 60,
     debounce: 400,
@@ -27,15 +28,16 @@
     'pullToRefreshConfig',
     function ($compile, $timeout, $q, pullToRefreshConfig) {
       return {
-        scope: true,
+        scope: { pullToRefreshConfig: '=' },
         restrict: 'A',
         transclude: true,
         templateUrl: 'angular-pull-to-refresh.tpl.html',
         compile: function compile(tElement, tAttrs, transclude) {
           return function postLink(scope, iElement, iAttrs) {
-            var config = angular.extend({}, pullToRefreshConfig, iAttrs);
+            var config = angular.extend({}, pullToRefreshConfig, scope.pullToRefreshConfig, iAttrs);
             var scrollElement = iElement.parent();
             var ptrElement = window.ptr = iElement.children()[0];
+            // Initialize isolated scope vars
             scope.text = config.text;
             scope.icon = config.icon;
             scope.status = 'pull';
@@ -79,6 +81,7 @@
       };
     }
   ]);
+  // Source: src/angular-pull-to-refresh.tpl.js
   angular.module('mgcrea.pullToRefresh').run([
     '$templateCache',
     function ($templateCache) {
