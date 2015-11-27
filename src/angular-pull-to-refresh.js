@@ -112,15 +112,9 @@ angular.module('mgcrea.pullToRefresh', [])
             }
           });
 
-          var isPullVisible = function (e) {
-            return startY < getTouch(e).pageY;
-          };
-
           iElement.bind('touchend', function(ev) {
-            if (isPullVisible(ev) || shouldReload) {
-              iElement.css(getTransformStyle(0));
-            }
             if(!shouldReload) return;
+            iElement.css(getTransformStyle(0));
             ptrElement.style.webkitTransitionDuration = 0;
             ptrElement.style.margin = '0 auto';
             setStatus('loading');

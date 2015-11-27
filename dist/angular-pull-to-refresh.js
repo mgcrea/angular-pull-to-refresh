@@ -1,6 +1,6 @@
 /**
  * angular-pull-to-refresh
- * @version v0.3.1 - 2015-11-27
+ * @version v0.3.0 - 2015-11-26
  * @link https://github.com/mgcrea/angular-pull-to-refresh
  * @author Olivier Louvignes <olivier@mg-crea.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -115,15 +115,10 @@
                 setStatus('pull');
               }
             });
-            var isOverTheFold = function (e) {
-              return startY < getTouch(e).pageY;
-            };
             iElement.bind('touchend', function (ev) {
-              if (isOverTheFold(ev) || shouldReload) {
-                iElement.css(getTransformStyle(0));
-              }
               if (!shouldReload)
                 return;
+              iElement.css(getTransformStyle(0));
               ptrElement.style.webkitTransitionDuration = 0;
               ptrElement.style.margin = '0 auto';
               setStatus('loading');
