@@ -1,4 +1,5 @@
 angular.module('mgcrea.pullToRefresh').run(['$templateCache', function($templateCache) {
+  'use strict';
 
   $templateCache.put('angular-pull-to-refresh.tpl.html',
     "<div class=\"pull-to-refresh\">\n" +
