@@ -1,0 +1,33 @@
+
+.content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    background-color: #fff;
+    -webkit-backface-visibility: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.navbar-fixed-top ~ .content {
+    top: 50px;
+}
+
+.list-group-table {
+    margin-bottom: 0px;
+}
+.list-group-table .list-group-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0px;
+    background: none;
+    height: 45px;
+}
+.list-group-table .list-group-item:first-child {
+    border-top-width: 0;
+}
