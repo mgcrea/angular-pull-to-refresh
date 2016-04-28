@@ -85,7 +85,7 @@ angular.module('mgcrea.pullToRefresh', [])
               'transform': translateFn
             };
           }
-          function getTouch(evt) {
+          function getDrag(evt) {
             var event = evt;
             if (event.originalEvent) {
               event = event.originalEvent;
@@ -94,33 +94,35 @@ angular.module('mgcrea.pullToRefresh', [])
           }
           var isUsingOverflowScroll = true;
           var startY;
-          var isTrackingMouse = false;
+          var isTracking = false;
           iElement.bind('touchstart mousedown', function (ev) {
-            startY = getTouch(ev).pageY;
-            isTrackingMouse = true
+            startY = getDrag(ev).pageY;
+            isTracking = true;
             ev.preventDefault()
           });
           iElement.bind('touchmove mousemove', function (ev) {
-            if (!isTrackingMouse)
+            if (!isTracking) {
               return;
+            }
             ev.preventDefault()
             var top = scrollElement[0].scrollTop;
-            var currentY = getTouch(ev).pageY;
+            var currentY = getDrag(ev).pageY;
             if (top === 0) {
               isUsingOverflowScroll = false;
               top = startY - currentY;
             }
             iElement.css(getTransformStyle(currentY - startY));
-            if(top < -config.treshold && !shouldReload) {
+            if (top < -config.treshold && !shouldReload) {
               setStatus('release');
             } else if(top > -config.treshold && shouldReload) {
               setStatus('pull');
             }
           });
           iElement.bind('touchend mouseup', function (ev) {
-            isTrackingMouse = false
-              if (!shouldReload)
-                return;
+            isTracking = false;
+            if (!shouldReload) {
+              return;
+            }
             iElement.css(getTransformStyle(0));
             ptrElement.style.webkitTransitionDuration = 0;
             ptrElement.style.margin = '0 auto';
