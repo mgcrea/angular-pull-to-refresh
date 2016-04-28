@@ -90,14 +90,20 @@ angular.module('mgcrea.pullToRefresh', [])
             if (event.originalEvent) {
               event = event.originalEvent;
             }
-            return event.touches[0];
+              return (event.touches && event.touches.length > 0) ? event.touches[0] : event;
           }
           var isUsingOverflowScroll = true;
           var startY;
-          iElement.bind('touchstart', function (ev) {
+          var isTrackingMouse = false;
+          iElement.bind('touchstart mousedown', function (ev) {
             startY = getTouch(ev).pageY;
+            isTrackingMouse = true
+            ev.preventDefault()
           });
-          iElement.bind('touchmove', function(ev) {
+          iElement.bind('touchmove mousemove', function (ev) {
+            if (!isTrackingMouse)
+              return;
+            ev.preventDefault()
             var top = scrollElement[0].scrollTop;
             var currentY = getTouch(ev).pageY;
             if (top === 0) {
@@ -111,9 +117,10 @@ angular.module('mgcrea.pullToRefresh', [])
               setStatus('pull');
             }
           });
-
-          iElement.bind('touchend', function(ev) {
-            if(!shouldReload) return;
+          iElement.bind('touchend mouseup', function (ev) {
+            isTrackingMouse = false
+              if (!shouldReload)
+                return;
             iElement.css(getTransformStyle(0));
             ptrElement.style.webkitTransitionDuration = 0;
             ptrElement.style.margin = '0 auto';
@@ -132,6 +139,7 @@ angular.module('mgcrea.pullToRefresh', [])
           });
 
           scope.$on('$destroy', function() {
+              iElement.unbind('touchstart');
             iElement.unbind('touchmove');
             iElement.unbind('touchend');
           });
