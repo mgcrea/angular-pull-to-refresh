@@ -9,3 +9,4 @@ docs/
 
 src/*.css
 scr/*.tpl.js
+.idea

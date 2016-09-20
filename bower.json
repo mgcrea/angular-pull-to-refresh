@@ -21,6 +21,10 @@
       "type": "MIT"
     }
   ],
+  "main": [
+      "dist/angular-pull-to-refresh.css",
+      "dist/angular-pull-to-refresh.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "angular": "~1.2.0",
